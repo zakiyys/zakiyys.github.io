@@ -44,9 +44,9 @@ const ROAD_LABEL_DISPLAY = true;
 const PRIVACY_MODE = false;
 // updated on 2024/11/17: lights are turned off by default
 //set to `false` if you want to make light off as default, only effect when `PRIVACY_MODE` = false
-const LIGHTS_ON = false;
+const LIGHTS_ON = true;
 //set to `true` if you want to show the 'Elevation Gain' column
-const SHOW_ELEVATION_GAIN = false;
+const SHOW_ELEVATION_GAIN = true;
 // richer title for the activity types (like garmin style)
 const RICH_TITLE = false;
 
@@ -58,7 +58,7 @@ const CHINESE_INFO_MESSAGE = (yearLength: number, year: string): string => {
   return `记录自己跑步 ${yearLength} 年了，下面列表展示的是${yearStr}的数据`;
 };
 const ENGLISH_INFO_MESSAGE = (yearLength: number, year: string): string =>
-  `Running Journey with ${yearLength} Years, the table shows year ${year} data`;
+  `Sudah lari selama ${yearLength} tahun, berikut data lari tahun ${year}`;
 
 // English is not supported for location info messages yet
 const CHINESE_LOCATION_INFO_MESSAGE_FIRST =
@@ -68,11 +68,11 @@ const CHINESE_LOCATION_INFO_MESSAGE_SECOND = "不要停下来，不要停下奔�
 const INFO_MESSAGE = IS_CHINESE ? CHINESE_INFO_MESSAGE : ENGLISH_INFO_MESSAGE;
 const FULL_MARATHON_RUN_TITLE = IS_CHINESE ? "全程马拉松" : "Full Marathon";
 const HALF_MARATHON_RUN_TITLE = IS_CHINESE ? "半程马拉松" : "Half Marathon";
-const MORNING_RUN_TITLE = IS_CHINESE ? "清晨跑步" : "Morning Run";
-const MIDDAY_RUN_TITLE = IS_CHINESE ? "午间跑步" : "Midday Run";
-const AFTERNOON_RUN_TITLE = IS_CHINESE ? "午后跑步" : "Afternoon Run";
-const EVENING_RUN_TITLE = IS_CHINESE ? "傍晚跑步" : "Evening Run";
-const NIGHT_RUN_TITLE = IS_CHINESE ? "夜晚跑步" : "Night Run";
+const MORNING_RUN_TITLE = IS_CHINESE ? "清晨跑步" : "Lari Pagi";
+const MIDDAY_RUN_TITLE = IS_CHINESE ? "午间跑步" : "Lari Siang";
+const AFTERNOON_RUN_TITLE = IS_CHINESE ? "午后跑步" : "Lari Sore";
+const EVENING_RUN_TITLE = IS_CHINESE ? "傍晚跑步" : "Lari Sore";
+const NIGHT_RUN_TITLE = IS_CHINESE ? "夜晚跑步" : "Lari Malam";
 const RUN_GENERIC_TITLE = IS_CHINESE ? "跑步" : "Run";
 const RUN_TRAIL_TITLE = IS_CHINESE ? "越野跑" : "Trail Run";
 const RUN_TREADMILL_TITLE = IS_CHINESE ? "跑步机" : "Treadmill Run";
@@ -180,7 +180,7 @@ export const SWIMMING_COLOR = "rgb(255,51,51)";
 
 // map tiles vendor, maptiler or mapbox or stadiamaps
 // if you want to use maptiler, set the access token in MAP_TILE_ACCESS_TOKEN
-export const MAP_TILE_VENDOR = "mapbox";
+export const MAP_TILE_VENDOR = "maptiler";
 
 // map tiles style name, see MAP_TILE_STYLES for more details
 export const MAP_TILE_STYLE = "dark-v10";
@@ -188,7 +188,7 @@ export const MAP_TILE_STYLE = "dark-v10";
 // access token. you can apply a new one, it's free.
 // maptiler: Gt5R0jT8tuIYxW6sNrAg | sign up at https://cloud.maptiler.com/auth/widget
 // stadiamaps: 8a769c5a-9125-4936-bdcf-a6b90cb5d0a4 | sign up at https://client.stadiamaps.com/signup/
-export const MAP_TILE_ACCESS_TOKEN = "Gt5R0jT8tuIYxW6sNrAg";
+export const MAP_TILE_ACCESS_TOKEN = "arTZX4I5W9TMqmyuhcCZ";
 
 export const MAP_TILE_STYLES = {
   maptiler: {

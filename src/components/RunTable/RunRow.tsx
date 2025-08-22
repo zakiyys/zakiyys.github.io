@@ -4,9 +4,9 @@ import {
   formatRunTime,
   Activity,
   RunIds,
-} from '@/utils/utils';
-import { SHOW_ELEVATION_GAIN } from '@/utils/const';
-import styles from './style.module.css';
+} from "@/utils/utils";
+import { SHOW_ELEVATION_GAIN } from "@/utils/const";
+import styles from "./style.module.css";
 
 interface IRunRowProperties {
   elementIndex: number;
@@ -39,7 +39,7 @@ const RunRow = ({
 
   return (
     <tr
-      className={`${styles.runRow} ${runIndex === elementIndex ? styles.selected : ''}`}
+      className={`${styles.runRow} ${runIndex === elementIndex ? styles.selected : ""}`}
       key={run.start_date_local}
       onClick={handleClick}
     >

@@ -1,11 +1,11 @@
-import { lazy, Suspense } from 'react';
-import Stat from '@/components/Stat';
-import useActivities from '@/hooks/useActivities';
-import { formatPace } from '@/utils/utils';
-import useHover from '@/hooks/useHover';
-import { yearStats } from '@assets/index';
-import { loadSvgComponent } from '@/utils/svgUtils';
-import { SHOW_ELEVATION_GAIN } from '@/utils/const';
+import { lazy, Suspense } from "react";
+import Stat from "@/components/Stat";
+import useActivities from "@/hooks/useActivities";
+import { formatPace } from "@/utils/utils";
+import useHover from "@/hooks/useHover";
+import { yearStats } from "@assets/index";
+import { loadSvgComponent } from "@/utils/svgUtils";
+import { SHOW_ELEVATION_GAIN } from "@/utils/const";
 
 const YearStat = ({
   year,
@@ -56,7 +56,7 @@ const YearStat = ({
   const avgPace = formatPace(totalMetersAvail / totalSecondsAvail);
   const hasHeartRate = !(heartRate === 0);
   const avgHeartRate = (heartRate / (runs.length - heartRateNullCount)).toFixed(
-    0
+    0,
   );
   return (
     <div className="cursor-pointer" onClick={() => onClick(year)}>
@@ -73,7 +73,7 @@ const YearStat = ({
           <Stat value={avgHeartRate} description=" Avg Heart Rate" />
         )}
       </section>
-      {year !== 'Total' && hovered && (
+      {year !== "Total" && hovered && (
         <Suspense fallback="loading...">
           <YearSVG className="my-4 h-4/6 w-4/6 border-0 p-0" />
         </Suspense>

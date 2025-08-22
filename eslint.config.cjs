@@ -1,22 +1,22 @@
-const tsParser = require('@typescript-eslint/parser');
-const tsPlugin = require('@typescript-eslint/eslint-plugin');
-const globals = require('globals');
-const react = require('eslint-plugin-react');
-const prettier = require('eslint-plugin-prettier');
-const js = require('@eslint/js');
+const tsParser = require("@typescript-eslint/parser");
+const tsPlugin = require("@typescript-eslint/eslint-plugin");
+const globals = require("globals");
+const react = require("eslint-plugin-react");
+const prettier = require("eslint-plugin-prettier");
+const js = require("@eslint/js");
 
 module.exports = [
   js.configs.recommended,
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       parser: tsParser,
       globals: {
         ...globals.browser,
         NodeJS: true,
       },
-      ecmaVersion: 'latest',
-      sourceType: 'module',
+      ecmaVersion: "latest",
+      sourceType: "module",
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -24,31 +24,31 @@ module.exports = [
       },
     },
     plugins: {
-      '@typescript-eslint': tsPlugin,
+      "@typescript-eslint": tsPlugin,
       react,
       prettier,
     },
     settings: {
       react: {
-        version: 'detect',
+        version: "detect",
       },
     },
     rules: {
       // React recommended rules
       ...react.configs.recommended.rules,
-      ...react.configs['jsx-runtime'].rules,
+      ...react.configs["jsx-runtime"].rules,
 
       // Custom rules
-      'prettier/prettier': 'off',
-      'react/prop-types': 'off',
-      'no-unused-vars': 'off',
-      '@typescript-eslint/no-unused-vars': [
-        'warn',
+      "prettier/prettier": "off",
+      "react/prop-types": "off",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": [
+        "warn",
         {
-          argsIgnorePattern: '^_',
-          varsIgnorePattern: '^_',
-          caughtErrorsIgnorePattern: '^_',
-          destructuredArrayIgnorePattern: '^_',
+          argsIgnorePattern: "^_",
+          varsIgnorePattern: "^_",
+          caughtErrorsIgnorePattern: "^_",
+          destructuredArrayIgnorePattern: "^_",
           ignoreRestSiblings: true,
         },
       ],
@@ -56,20 +56,20 @@ module.exports = [
   },
   {
     ignores: [
-      '**/node_modules/',
-      '**/dist/',
-      '**/pyproject.toml',
-      '**/LICENSE',
-      '**/*lock.*',
-      '**/*.html',
-      '**/*.md',
-      '**/*.css',
-      '**/*.svg',
-      '**/*.png',
-      '**/*.jpg',
-      '**/*.ico',
-      '**/*.lock',
-      '**/*.min.js',
+      "**/node_modules/",
+      "**/dist/",
+      "**/pyproject.toml",
+      "**/LICENSE",
+      "**/*lock.*",
+      "**/*.html",
+      "**/*.md",
+      "**/*.css",
+      "**/*.svg",
+      "**/*.png",
+      "**/*.jpg",
+      "**/*.ico",
+      "**/*.lock",
+      "**/*.min.js",
     ],
   },
 ];

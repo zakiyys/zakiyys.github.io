@@ -1,15 +1,15 @@
-import React, { useState, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback } from "react";
 import {
   sortDateFunc,
   sortDateFuncReverse,
   convertMovingTime2Sec,
   Activity,
   RunIds,
-} from '@/utils/utils';
-import { SHOW_ELEVATION_GAIN } from '@/utils/const';
+} from "@/utils/utils";
+import { SHOW_ELEVATION_GAIN } from "@/utils/const";
 
-import RunRow from './RunRow';
-import styles from './style.module.css';
+import RunRow from "./RunRow";
+import styles from "./style.module.css";
 
 interface IRunTableProperties {
   runs: Activity[];
@@ -28,46 +28,46 @@ const RunTable = ({
   runIndex,
   setRunIndex,
 }: IRunTableProperties) => {
-  const [sortFuncInfo, setSortFuncInfo] = useState('');
+  const [sortFuncInfo, setSortFuncInfo] = useState("");
 
   // Memoize sort functions to prevent recreating them on every render
   const sortFunctions = useMemo(() => {
     const sortKMFunc: SortFunc = (a, b) =>
-      sortFuncInfo === 'KM' ? a.distance - b.distance : b.distance - a.distance;
+      sortFuncInfo === "KM" ? a.distance - b.distance : b.distance - a.distance;
     const sortElevationGainFunc: SortFunc = (a, b) =>
-      sortFuncInfo === 'Elev'
+      sortFuncInfo === "Elev"
         ? (a.elevation_gain ?? 0) - (b.elevation_gain ?? 0)
         : (b.elevation_gain ?? 0) - (a.elevation_gain ?? 0);
     const sortPaceFunc: SortFunc = (a, b) =>
-      sortFuncInfo === 'Pace'
+      sortFuncInfo === "Pace"
         ? a.average_speed - b.average_speed
         : b.average_speed - a.average_speed;
     const sortBPMFunc: SortFunc = (a, b) => {
-      return sortFuncInfo === 'BPM'
+      return sortFuncInfo === "BPM"
         ? (a.average_heartrate ?? 0) - (b.average_heartrate ?? 0)
         : (b.average_heartrate ?? 0) - (a.average_heartrate ?? 0);
     };
     const sortRunTimeFunc: SortFunc = (a, b) => {
       const aTotalSeconds = convertMovingTime2Sec(a.moving_time);
       const bTotalSeconds = convertMovingTime2Sec(b.moving_time);
-      return sortFuncInfo === 'Time'
+      return sortFuncInfo === "Time"
         ? aTotalSeconds - bTotalSeconds
         : bTotalSeconds - aTotalSeconds;
     };
     const sortDateFuncClick =
-      sortFuncInfo === 'Date' ? sortDateFunc : sortDateFuncReverse;
+      sortFuncInfo === "Date" ? sortDateFunc : sortDateFuncReverse;
 
     const sortFuncMap = new Map([
-      ['KM', sortKMFunc],
-      ['Elev', sortElevationGainFunc],
-      ['Pace', sortPaceFunc],
-      ['BPM', sortBPMFunc],
-      ['Time', sortRunTimeFunc],
-      ['Date', sortDateFuncClick],
+      ["KM", sortKMFunc],
+      ["Elev", sortElevationGainFunc],
+      ["Pace", sortPaceFunc],
+      ["BPM", sortBPMFunc],
+      ["Time", sortRunTimeFunc],
+      ["Date", sortDateFuncClick],
     ]);
 
     if (!SHOW_ELEVATION_GAIN) {
-      sortFuncMap.delete('Elev');
+      sortFuncMap.delete("Elev");
     }
 
     return sortFuncMap;
@@ -79,10 +79,10 @@ const RunTable = ({
       const f = sortFunctions.get(funcName);
 
       setRunIndex(-1);
-      setSortFuncInfo(sortFuncInfo === funcName ? '' : funcName);
+      setSortFuncInfo(sortFuncInfo === funcName ? "" : funcName);
       setActivity(runs.sort(f));
     },
-    [sortFunctions, sortFuncInfo, runs, setRunIndex, setActivity]
+    [sortFunctions, sortFuncInfo, runs, setRunIndex, setActivity],
   );
 
   return (

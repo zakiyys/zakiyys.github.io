@@ -1,7 +1,7 @@
-import { ReactComponent as EndSvg } from '@assets/end.svg';
-import { ReactComponent as StartSvg } from '@assets/start.svg';
-import { Marker } from 'react-map-gl';
-import styles from './style.module.css';
+import { ReactComponent as EndSvg } from "@assets/end.svg";
+import { ReactComponent as StartSvg } from "@assets/start.svg";
+import { Marker } from "react-map-gl";
+import styles from "./style.module.css";
 
 interface IRunMarkerProperties {
   startLon: number;
@@ -28,7 +28,7 @@ const RunMarker = ({
         <div
           style={{
             transform: `translate(${-size / 2}px,${-size}px)`,
-            maxWidth: '25px',
+            maxWidth: "25px",
           }}
         >
           <StartSvg className={styles.locationSVG} />
@@ -38,7 +38,7 @@ const RunMarker = ({
         <div
           style={{
             transform: `translate(${-size / 2}px,${-size}px)`,
-            maxWidth: '25px',
+            maxWidth: "25px",
           }}
         >
           <EndSvg className={styles.locationSVG} />

@@ -558,14 +558,14 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
   border-radius: 50%;
 }
 .mapboxgl-user-location-dot:before {
-  content: '';
+  content: "";
   position: absolute;
   animation: mapboxgl-user-location-dot-pulse 2s infinite;
 }
 .mapboxgl-user-location-dot:after {
   border-radius: 50%;
   border: 2px solid #fff;
-  content: '';
+  content: "";
   height: 19px;
   left: -2px;
   position: absolute;
@@ -580,7 +580,7 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 }
 .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading:after,
 .mapboxgl-user-location-show-heading .mapboxgl-user-location-heading:before {
-  content: '';
+  content: "";
   border-bottom: 7.5px solid #4aa1eb;
   position: absolute;
 }

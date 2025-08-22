@@ -1,20 +1,20 @@
-import MapboxLanguage from '@mapbox/mapbox-gl-language';
+import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import React, {
   useRef,
   useCallback,
   useState,
   useEffect,
   useMemo,
-} from 'react';
+} from "react";
 import Map, {
   Layer,
   Source,
   FullscreenControl,
   NavigationControl,
   MapRef,
-} from 'react-map-gl';
-import { MapInstance } from 'react-map-gl/src/types/lib';
-import useActivities from '@/hooks/useActivities';
+} from "react-map-gl";
+import { MapInstance } from "react-map-gl/src/types/lib";
+import useActivities from "@/hooks/useActivities";
 import {
   IS_CHINESE,
   ROAD_LABEL_DISPLAY,
@@ -29,22 +29,22 @@ import {
   MAP_TILE_STYLE,
   MAP_TILE_VENDOR,
   MAP_TILE_ACCESS_TOKEN,
-} from '@/utils/const';
+} from "@/utils/const";
 import {
   Coordinate,
   IViewState,
   geoJsonForMap,
   getMapStyle,
   isTouchDevice,
-} from '@/utils/utils';
-import { RouteAnimator } from '@/utils/routeAnimation';
-import RunMarker from './RunMarker';
-import RunMapButtons from './RunMapButtons';
-import styles from './style.module.css';
-import { FeatureCollection } from 'geojson';
-import { RPGeometry } from '@/static/run_countries';
-import './mapbox.css';
-import LightsControl from '@/components/RunMap/LightsControl';
+} from "@/utils/utils";
+import { RouteAnimator } from "@/utils/routeAnimation";
+import RunMarker from "./RunMarker";
+import RunMapButtons from "./RunMapButtons";
+import styles from "./style.module.css";
+import { FeatureCollection } from "geojson";
+import { RPGeometry } from "@/static/run_countries";
+import "./mapbox.css";
+import LightsControl from "@/components/RunMap/LightsControl";
 
 interface IRunMapProps {
   title: string;
@@ -69,7 +69,7 @@ const RunMap = ({
   const mapRef = useRef<MapRef>();
   const [lights, setLights] = useState(PRIVACY_MODE ? false : LIGHTS_ON);
   // layers that should remain visible when lights are off
-  const keepWhenLightsOff = ['runs2', 'animated-run'];
+  const keepWhenLightsOff = ["runs2", "animated-run"];
   const [mapGeoData, setMapGeoData] =
     useState<FeatureCollection<RPGeometry> | null>(null);
   const [isLoadingMapData, setIsLoadingMapData] = useState(false);
@@ -77,7 +77,7 @@ const RunMap = ({
   // Memoize map style to prevent recreating it on every render
   const mapStyle = useMemo(
     () => getMapStyle(MAP_TILE_VENDOR, MAP_TILE_STYLE, MAP_TILE_ACCESS_TOKEN),
-    []
+    [],
   );
 
   // animation state (single run only)
@@ -88,13 +88,13 @@ const RunMap = ({
   // Memoize filter arrays to prevent recreating them on every render
   const filterProvinces = useMemo(() => {
     const filtered = provinces.slice();
-    filtered.unshift('in', 'name');
+    filtered.unshift("in", "name");
     return filtered;
   }, [provinces]);
 
   const filterCountries = useMemo(() => {
     const filtered = countries.slice();
-    filtered.unshift('in', 'name');
+    filtered.unshift("in", "name");
     return filtered;
   }, [countries]);
 
@@ -102,8 +102,8 @@ const RunMap = ({
     const styleJson = map.getStyle();
     styleJson.layers.forEach((it: { id: string }) => {
       if (!keepWhenLightsOff.includes(it.id)) {
-        if (lights) map.setLayoutProperty(it.id, 'visibility', 'visible');
-        else map.setLayoutProperty(it.id, 'visibility', 'none');
+        if (lights) map.setLayoutProperty(it.id, "visibility", "visible");
+        else map.setLayoutProperty(it.id, "visibility", "none");
       }
     });
   }
@@ -112,14 +112,14 @@ const RunMap = ({
       if (ref !== null) {
         const map = ref.getMap();
         if (map && IS_CHINESE) {
-          map.addControl(new MapboxLanguage({ defaultLanguage: 'zh-Hans' }));
+          map.addControl(new MapboxLanguage({ defaultLanguage: "zh-Hans" }));
         }
         // all style resources have been downloaded
         // and the first visually complete rendering of the base style has occurred.
         // it's odd. when use style other than mapbox, the style.load event is not triggered.Add commentMore actions
         // so I use data event instead of style.load event and make sure we handle it only once.
-        map.on('data', (event) => {
-          if (event.dataType !== 'style' || mapRef.current) {
+        map.on("data", (event) => {
+          if (event.dataType !== "style" || mapRef.current) {
             return;
           }
           if (!ROAD_LABEL_DISPLAY) {
@@ -127,8 +127,8 @@ const RunMap = ({
             const labelLayerNames = layers
               .filter(
                 (layer: any) =>
-                  (layer.type === 'symbol' || layer.type === 'composite') &&
-                  layer.layout.text_field !== null
+                  (layer.type === "symbol" || layer.type === "composite") &&
+                  layer.layout.text_field !== null,
               )
               .map((layer: any) => layer.id);
             labelLayerNames.forEach((layerId) => {
@@ -144,7 +144,7 @@ const RunMap = ({
         switchLayerVisibility(map, lights);
       }
     },
-    [mapRef, lights]
+    [mapRef, lights],
   );
 
   const initGeoDataLength = geoData.features.length;
@@ -169,7 +169,7 @@ const RunMap = ({
     // Show boundary and line together, combine geoData(only when not combine yet)
     if (geoData.features.length === initGeoDataLength) {
       combinedGeoData = {
-        type: 'FeatureCollection',
+        type: "FeatureCollection",
         features: geoData.features.concat(mapGeoData.features),
       };
     }
@@ -203,26 +203,26 @@ const RunMap = ({
     ({ viewState }: { viewState: IViewState }) => {
       setViewState(viewState);
     },
-    [setViewState]
+    [setViewState],
   );
 
   const style: React.CSSProperties = useMemo(
     () => ({
-      width: '100%',
+      width: "100%",
       height: MAP_HEIGHT,
-      maxWidth: '100%', // Prevent overflow on mobile
+      maxWidth: "100%", // Prevent overflow on mobile
     }),
-    []
+    [],
   );
 
   const fullscreenButton: React.CSSProperties = useMemo(
     () => ({
-      position: 'absolute',
-      marginTop: '29.2px',
-      right: '0px',
+      position: "absolute",
+      marginTop: "29.2px",
+      right: "0px",
       opacity: 0.3,
     }),
-    []
+    [],
   );
 
   useEffect(() => {
@@ -231,9 +231,9 @@ const RunMap = ({
         mapRef.current.getMap().resize();
       }
     };
-    document.addEventListener('fullscreenchange', handleFullscreenChange);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
     return () => {
-      document.removeEventListener('fullscreenchange', handleFullscreenChange);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
     };
   }, []);
 
@@ -254,7 +254,7 @@ const RunMap = ({
       setAnimatedPoints,
       () => {
         routeAnimatorRef.current = null;
-      }
+      },
     );
 
     // Start animation
@@ -265,7 +265,7 @@ const RunMap = ({
   useEffect(() => {
     if (!isSingleRun) return;
     const pts = geoData.features[0].geometry.coordinates as Coordinate[];
-    const key = `${pts.length}-${pts[0]?.join(',')}-${pts[pts.length - 1]?.join(',')}`;
+    const key = `${pts.length}-${pts[0]?.join(",")}-${pts[pts.length - 1]?.join(",")}`;
     if (key && key !== lastRouteKeyRef.current) {
       lastRouteKeyRef.current = key;
       startRouteAnimation();
@@ -307,7 +307,7 @@ const RunMap = ({
           id="province"
           type="fill"
           paint={{
-            'fill-color': PROVINCE_FILL_COLOR,
+            "fill-color": PROVINCE_FILL_COLOR,
           }}
           filter={filterProvinces}
         />
@@ -315,9 +315,9 @@ const RunMap = ({
           id="countries"
           type="fill"
           paint={{
-            'fill-color': COUNTRY_FILL_COLOR,
+            "fill-color": COUNTRY_FILL_COLOR,
             // in China, fill a bit lighter while already filled provinces
-            'fill-opacity': ['case', ['==', ['get', 'name'], '中国'], 0.1, 0.5],
+            "fill-opacity": ["case", ["==", ["get", "name"], "中国"], 0.1, 0.5],
           }}
           filter={filterCountries}
         />
@@ -325,16 +325,16 @@ const RunMap = ({
           id="runs2"
           type="line"
           paint={{
-            'line-color': ['get', 'color'],
-            'line-width': isBigMap && lights ? 1 : 2,
-            'line-dasharray': dash,
-            'line-opacity':
+            "line-color": ["get", "color"],
+            "line-width": isBigMap && lights ? 1 : 2,
+            "line-dasharray": dash,
+            "line-opacity":
               isSingleRun || isBigMap || !lights ? 1 : LINE_OPACITY,
-            'line-blur': 1,
+            "line-blur": 1,
           }}
           layout={{
-            'line-join': 'round',
-            'line-cap': 'round',
+            "line-join": "round",
+            "line-cap": "round",
           }}
         />
       </Source>
@@ -343,13 +343,13 @@ const RunMap = ({
           id="animated-run"
           type="geojson"
           data={{
-            type: 'FeatureCollection',
+            type: "FeatureCollection",
             features: [
               {
-                type: 'Feature',
-                properties: { color: '#ff4d4f' },
+                type: "Feature",
+                properties: { color: "#ff4d4f" },
                 geometry: {
-                  type: 'LineString',
+                  type: "LineString",
                   coordinates: animatedPoints,
                 },
               },
@@ -360,13 +360,13 @@ const RunMap = ({
             id="animated-run"
             type="line"
             paint={{
-              'line-color': ['get', 'color'],
-              'line-width': 3,
-              'line-opacity': 1,
+              "line-color": ["get", "color"],
+              "line-width": 3,
+              "line-opacity": 1,
             }}
             layout={{
-              'line-join': 'round',
-              'line-cap': 'round',
+              "line-join": "round",
+              "line-cap": "round",
             }}
           />
         </Source>
@@ -384,7 +384,7 @@ const RunMap = ({
       {!PRIVACY_MODE && <LightsControl setLights={setLights} lights={lights} />}
       <NavigationControl
         showCompass={false}
-        position={'bottom-right'}
+        position={"bottom-right"}
         style={{ opacity: 0.3 }}
       />
     </Map>

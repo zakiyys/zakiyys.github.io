@@ -1,5 +1,5 @@
-import Stat from '@/components/Stat';
-import useActivities from '@/hooks/useActivities';
+import Stat from "@/components/Stat";
+import useActivities from "@/hooks/useActivities";
 
 const PeriodStat = ({ onClick }: { onClick: (_period: string) => void }) => {
   const { runPeriod } = useActivities();

@@ -1,5 +1,5 @@
-import Stat from '@/components/Stat';
-import useActivities from '@/hooks/useActivities';
+import Stat from "@/components/Stat";
+import useActivities from "@/hooks/useActivities";
 
 // only support China for now
 const LocationSummary = () => {

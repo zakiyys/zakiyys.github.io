@@ -1,8 +1,8 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import Header from '@/components/Header';
-import useSiteMetadata from '@/hooks/useSiteMetadata';
+import PropTypes from "prop-types";
+import React from "react";
+import { Helmet } from "react-helmet-async";
+import Header from "@/components/Header";
+import useSiteMetadata from "@/hooks/useSiteMetadata";
 
 const Layout = ({ children }: React.PropsWithChildren) => {
   const { siteTitle, description } = useSiteMetadata();

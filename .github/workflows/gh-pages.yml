@@ -25,7 +25,7 @@ on:
 
 # Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -74,7 +74,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
       - name: Enable corepack
         run: npm install -g corepack@latest && corepack enable pnpm
 
@@ -103,7 +103,7 @@ jobs:
         with:
           # Upload dist repository
           name: pages-artifact
-          path: './dist'
+          path: "./dist"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

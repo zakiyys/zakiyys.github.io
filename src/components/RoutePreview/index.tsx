@@ -1,6 +1,6 @@
-import React from 'react';
-import { pathForRun, Activity } from '@/utils/utils';
-import styles from './style.module.css';
+import React from "react";
+import { pathForRun, Activity } from "@/utils/utils";
+import styles from "./style.module.css";
 
 interface RoutePreviewProps {
   activities: Activity[];
@@ -13,12 +13,12 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({
 }) => {
   // Filter activities that have polyline data
   const activitiesWithRoutes = activities.filter(
-    (activity) => activity.summary_polyline
+    (activity) => activity.summary_polyline,
   );
 
   if (activitiesWithRoutes.length === 0) {
     return (
-      <div className={`${styles.routePreview} ${className || ''}`}>
+      <div className={`${styles.routePreview} ${className || ""}`}>
         <div className={styles.noRoute}>暂无路线数据</div>
       </div>
     );
@@ -29,7 +29,7 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({
     activitiesWithRoutes.map((activity, index) => {
       const path = pathForRun(activity);
       // Use different colors for multiple routes
-      const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
+      const colors = ["#e74c3c", "#3498db", "#2ecc71", "#f39c12", "#9b59b6"];
       const color = colors[index % colors.length];
       return { path, color };
     });
@@ -38,7 +38,7 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({
   const allPoints = allCoordinates.flatMap((route) => route.path);
   if (allPoints.length === 0) {
     return (
-      <div className={`${styles.routePreview} ${className || ''}`}>
+      <div className={`${styles.routePreview} ${className || ""}`}>
         <div className={styles.noRoute}>路线数据无效</div>
       </div>
     );
@@ -79,7 +79,7 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({
   };
 
   return (
-    <div className={`${styles.routePreview} ${className || ''}`}>
+    <div className={`${styles.routePreview} ${className || ""}`}>
       <svg width={svgWidth} height={svgHeight} className={styles.routeSvg}>
         {/* Background */}
         <rect
@@ -95,9 +95,9 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({
           const pathString = route.path
             .map((coord, index) => {
               const [x, y] = coordToSvg(coord[0], coord[1]);
-              return `${index === 0 ? 'M' : 'L'} ${x} ${y}`;
+              return `${index === 0 ? "M" : "L"} ${x} ${y}`;
             })
-            .join(' ');
+            .join(" ");
 
           return (
             <g key={routeIndex}>
@@ -130,13 +130,13 @@ const RoutePreview: React.FC<RoutePreviewProps> = ({
                   cx={
                     coordToSvg(
                       route.path[route.path.length - 1][0],
-                      route.path[route.path.length - 1][1]
+                      route.path[route.path.length - 1][1],
                     )[0]
                   }
                   cy={
                     coordToSvg(
                       route.path[route.path.length - 1][0],
-                      route.path[route.path.length - 1][1]
+                      route.path[route.path.length - 1][1],
                     )[1]
                   }
                   r="3"

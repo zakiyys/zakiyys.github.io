@@ -1,4 +1,4 @@
-import { intComma } from '@/utils/utils';
+import { intComma } from "@/utils/utils";
 
 interface IStatProperties {
   value: string | number;
@@ -11,7 +11,7 @@ interface IStatProperties {
 const Stat = ({
   value,
   description,
-  className = 'pb-2 w-full',
+  className = "pb-2 w-full",
   citySize,
   onClick,
 }: IStatProperties) => (

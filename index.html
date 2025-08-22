@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <script>
       (function () {
-        const basePath = '%BASE_URL%';
-        const redirect = sessionStorage.getItem('redirect');
+        const basePath = "%BASE_URL%";
+        const redirect = sessionStorage.getItem("redirect");
         if (redirect) {
-          sessionStorage.removeItem('redirect');
+          sessionStorage.removeItem("redirect");
           if (
-            redirect !== basePath + '/' &&
-            redirect !== basePath + '/index.html'
+            redirect !== basePath + "/" &&
+            redirect !== basePath + "/index.html"
           ) {
-            window.history.pushState(null, '', redirect);
+            window.history.pushState(null, "", redirect);
           }
         }
       })();

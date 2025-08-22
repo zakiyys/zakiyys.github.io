@@ -1,11 +1,11 @@
-import { lazy, Suspense } from 'react';
-import { totalStat } from '@assets/index';
-import { loadSvgComponent } from '@/utils/svgUtils';
+import { lazy, Suspense } from "react";
+import { totalStat } from "@assets/index";
+import { loadSvgComponent } from "@/utils/svgUtils";
 
 // Lazy load both github.svg and grid.svg
-const GithubSvg = lazy(() => loadSvgComponent(totalStat, './github.svg'));
+const GithubSvg = lazy(() => loadSvgComponent(totalStat, "./github.svg"));
 
-const GridSvg = lazy(() => loadSvgComponent(totalStat, './grid.svg'));
+const GridSvg = lazy(() => loadSvgComponent(totalStat, "./grid.svg"));
 
 const SVGStat = () => (
   <div id="svgStat">

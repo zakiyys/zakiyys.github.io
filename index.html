@@ -1,67 +1,28 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Belajar nih bos</title>  
-    <script src ="jquery.js"></script>
-</head>
-
-<body>
-
-<div id="text"></div>
-<p>kontol</p>
-
-<button type="button" onclick="gantijamjepang()">Jam Jepang</button>
-
-<p> Kalkulator Test</p>
-<h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Non earum fugiat cupiditate libero culpa, commodi ex perferendis reiciendis accusantium quae laboriosam inventore quis voluptatem fuga exercitationem iste quidem nostrum temporibus.</h1>
-<input type="text" id="angka1">
-<input type="text" id="angka2">
-<span>=</span>
-<input type="text" id="hasil" disabled>
-</br>
-
-<button type="button" onclick="tambah()">+</button>
-<button type="button" onclick="kurang()">-</button>
-<button type="button" onclick="kali()">x</button>
-<button type="button" onclick="bagi()">bagi</button>
-<br>
-<div id=apaya>
-<input type="text" id="angka1tambah">
-<span>+</span>
-<input type="text" id="angka2tambah">
-<span>=</span>
-<input type="text" id="hasiltambah" disabled>
-</br>
-<input type="text" id="angka1kali">
-<span>x</span>
-<input type="text" id="angka2kali">
-<span>=</span>
-<input type="text" id="hasilkali" disabled>
-</br>
-<input type="text" id="angka1kurang">
-<span>-</span>
-<input type="text" id="angka2kurang">
-<span>=</span>
-<input type="text" id="hasilkurang" disabled>
-</br>
-<input type="text" id="angka1bagi">
-<span>/</span>
-<input type="text" id="angka2bagi">
-<span>=</span>
-<input type="text" id="hasilbagi" disabled>
-</div>
-</br>
-<br>
-<span>siapa saya</span>
-<button type="button" onclick="tampilJson()">siapa hayo</button>
-
-<input type="text" id="nama">
-<input type="text" id="umur">
-</br>
-
-<script src="skrip.js" type="text/javascript"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      (function () {
+        const basePath = '%BASE_URL%';
+        const redirect = sessionStorage.getItem('redirect');
+        if (redirect) {
+          sessionStorage.removeItem('redirect');
+          if (
+            redirect !== basePath + '/' &&
+            redirect !== basePath + '/index.html'
+          ) {
+            window.history.pushState(null, '', redirect);
+          }
+        }
+      })();
+    </script>
+    <link rel="icon" type="image/png" href="%BASE_URL%/images/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Running Page</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
 </html>

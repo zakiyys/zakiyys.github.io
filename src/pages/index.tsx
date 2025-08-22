@@ -1,15 +1,15 @@
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import { Analytics } from '@vercel/analytics/react';
-import Layout from '@/components/Layout';
-import LocationStat from '@/components/LocationStat';
-import RunMap from '@/components/RunMap';
-import RunTable from '@/components/RunTable';
-import SVGStat from '@/components/SVGStat';
-import YearsStat from '@/components/YearsStat';
-import useActivities from '@/hooks/useActivities';
-import useSiteMetadata from '@/hooks/useSiteMetadata';
-import { useInterval } from '@/hooks/useInterval';
-import { IS_CHINESE } from '@/utils/const';
+import { useEffect, useState, useMemo, useCallback } from "react";
+import { Analytics } from "@vercel/analytics/react";
+import Layout from "@/components/Layout";
+import LocationStat from "@/components/LocationStat";
+import RunMap from "@/components/RunMap";
+import RunTable from "@/components/RunTable";
+import SVGStat from "@/components/SVGStat";
+import YearsStat from "@/components/YearsStat";
+import useActivities from "@/hooks/useActivities";
+import useSiteMetadata from "@/hooks/useSiteMetadata";
+import { useInterval } from "@/hooks/useInterval";
+import { IS_CHINESE } from "@/utils/const";
 import {
   Activity,
   IViewState,
@@ -23,14 +23,14 @@ import {
   sortDateFunc,
   titleForShow,
   RunIds,
-} from '@/utils/utils';
+} from "@/utils/utils";
 
 const Index = () => {
   const { siteTitle } = useSiteMetadata();
   const { activities, thisYear } = useActivities();
   const [year, setYear] = useState(thisYear);
   const [runIndex, setRunIndex] = useState(-1);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState("");
   // Animation states for replacing intervalIdRef
   const [isAnimating, setIsAnimating] = useState(false);
   const [currentAnimationIndex, setCurrentAnimationIndex] = useState(0);
@@ -48,9 +48,9 @@ const Index = () => {
 
   // Parse URL hash on mount to check for run ID
   useEffect(() => {
-    const hash = window.location.hash.replace('#', '');
-    if (hash && hash.startsWith('run_')) {
-      const runId = parseInt(hash.replace('run_', ''), 10);
+    const hash = window.location.hash.replace("#", "");
+    if (hash && hash.startsWith("run_")) {
+      const runId = parseInt(hash.replace("run_", ""), 10);
       if (!isNaN(runId)) {
         setSingleRunId(runId);
       }
@@ -58,9 +58,9 @@ const Index = () => {
 
     // Listen for hash changes (browser back/forward buttons)
     const handleHashChange = () => {
-      const newHash = window.location.hash.replace('#', '');
-      if (newHash && newHash.startsWith('run_')) {
-        const runId = parseInt(newHash.replace('run_', ''), 10);
+      const newHash = window.location.hash.replace("#", "");
+      if (newHash && newHash.startsWith("run_")) {
+        const runId = parseInt(newHash.replace("run_", ""), 10);
         if (!isNaN(runId)) {
           setSingleRunId(runId);
         }
@@ -70,10 +70,10 @@ const Index = () => {
       }
     };
 
-    window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener("hashchange", handleHashChange);
 
     return () => {
-      window.removeEventListener('hashchange', handleHashChange);
+      window.removeEventListener("hashchange", handleHashChange);
     };
   }, []);
 
@@ -83,7 +83,7 @@ const Index = () => {
       activities,
       currentFilter.item,
       currentFilter.func,
-      sortDateFunc
+      sortDateFunc,
     );
   }, [activities, currentFilter.item, currentFilter.func]);
 
@@ -124,7 +124,7 @@ const Index = () => {
         setAnimatedGeoData(geoData);
       }
     },
-    isAnimating ? 300 : null
+    isAnimating ? 300 : null,
   );
 
   // Helper function to start animation
@@ -141,17 +141,17 @@ const Index = () => {
       setCurrentAnimationIndex(sliceNum);
       setIsAnimating(true);
     },
-    [geoData]
+    [geoData],
   );
 
   const changeByItem = useCallback(
     (
       item: string,
       name: string,
-      func: (_run: Activity, _value: string) => boolean
+      func: (_run: Activity, _value: string) => boolean,
     ) => {
       scrollToMap();
-      if (name != 'Year') {
+      if (name != "Year") {
         setYear(thisYear);
       }
       setCurrentFilter({ item, func });
@@ -160,10 +160,10 @@ const Index = () => {
       // Reset single run state when changing filters
       setSingleRunId(null);
       if (window.location.hash) {
-        window.history.pushState(null, '', window.location.pathname);
+        window.history.pushState(null, "", window.location.pathname);
       }
     },
-    [thisYear]
+    [thisYear],
   );
 
   const changeYear = useCallback(
@@ -177,32 +177,32 @@ const Index = () => {
         });
       }
 
-      changeByItem(y, 'Year', filterYearRuns);
+      changeByItem(y, "Year", filterYearRuns);
       // Stop current animation
       setIsAnimating(false);
     },
-    [viewState.zoom, bounds, changeByItem]
+    [viewState.zoom, bounds, changeByItem],
   );
 
   const changeCity = useCallback(
     (city: string) => {
-      changeByItem(city, 'City', filterCityRuns);
+      changeByItem(city, "City", filterCityRuns);
     },
-    [changeByItem]
+    [changeByItem],
   );
 
   const changeTitle = useCallback(
     (title: string) => {
-      changeByItem(title, 'Title', filterTitleRuns);
+      changeByItem(title, "Title", filterTitleRuns);
     },
-    [changeByItem]
+    [changeByItem],
   );
 
   // For RunTable compatibility - create a mock setActivity function
   const setActivity = useCallback((_newRuns: Activity[]) => {
     // Since we're using memoized runs, we can't directly set activity
     // This is used by RunTable but we can work around it by managing the filter instead
-    console.warn('setActivity called but runs are now computed from filters');
+    console.warn("setActivity called but runs are now computed from filters");
   }, []);
 
   const locateActivity = useCallback(
@@ -237,13 +237,13 @@ const Index = () => {
         const runId = runIds[0];
         const newHash = `#run_${runId}`;
         if (window.location.hash !== newHash) {
-          window.history.pushState(null, '', newHash);
+          window.history.pushState(null, "", newHash);
         }
         setSingleRunId(runId);
       } else {
         // If multiple runs or no runs, clear the hash and single run state
         if (window.location.hash) {
-          window.history.pushState(null, '', window.location.pathname);
+          window.history.pushState(null, "", window.location.pathname);
         }
         setSingleRunId(null);
       }
@@ -270,7 +270,7 @@ const Index = () => {
       setTitle(titleForShow(lastRun));
       scrollToMap();
     },
-    [runs]
+    [runs],
   );
 
   // Auto locate activity when singleRunId is set and activities are loaded
@@ -284,7 +284,7 @@ const Index = () => {
       } else {
         // If run doesn't exist, clear the hash and show a warning
         console.warn(`Run with ID ${singleRunId} not found in activities`);
-        window.history.replaceState(null, '', window.location.pathname);
+        window.history.replaceState(null, "", window.location.pathname);
         setSingleRunId(null);
       }
     }
@@ -304,20 +304,20 @@ const Index = () => {
   }, [runs, startAnimation]);
 
   useEffect(() => {
-    if (year !== 'Total') {
+    if (year !== "Total") {
       return;
     }
 
-    let svgStat = document.getElementById('svgStat');
+    let svgStat = document.getElementById("svgStat");
     if (!svgStat) {
       return;
     }
 
     const handleClick = (e: Event) => {
       const target = e.target as HTMLElement;
-      if (target.tagName.toLowerCase() === 'path') {
+      if (target.tagName.toLowerCase() === "path") {
         // Use querySelector to get the <desc> element and the <title> element.
-        const descEl = target.querySelector('desc');
+        const descEl = target.querySelector("desc");
         if (descEl) {
           // If the runId exists in the <desc> element, it means that a running route has been clicked.
           const runId = Number(descEl.innerHTML);
@@ -328,11 +328,11 @@ const Index = () => {
           return;
         }
 
-        const titleEl = target.querySelector('title');
+        const titleEl = target.querySelector("title");
         if (titleEl) {
           // If the runDate exists in the <title> element, it means that a date square has been clicked.
           const [runDate] = titleEl.innerHTML.match(
-            /\d{4}-\d{1,2}-\d{1,2}/
+            /\d{4}-\d{1,2}-\d{1,2}/,
           ) || [`${+thisYear + 1}`];
           const runIDsOnDate = runs
             .filter((r) => r.start_date_local.slice(0, 10) === runDate)
@@ -344,9 +344,9 @@ const Index = () => {
         }
       }
     };
-    svgStat.addEventListener('click', handleClick);
+    svgStat.addEventListener("click", handleClick);
     return () => {
-      svgStat && svgStat.removeEventListener('click', handleClick);
+      svgStat && svgStat.removeEventListener("click", handleClick);
     };
   }, [year]);
 
@@ -376,7 +376,7 @@ const Index = () => {
           thisYear={year}
           animationTrigger={animationTrigger}
         />
-        {year === 'Total' ? (
+        {year === "Total" ? (
           <SVGStat />
         ) : (
           <RunTable

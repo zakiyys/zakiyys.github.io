@@ -1,4 +1,4 @@
-import siteMetadata from '@/static/site-metadata';
+import siteMetadata from "@/static/site-metadata";
 
 const useSiteMetadata = () => siteMetadata;
 

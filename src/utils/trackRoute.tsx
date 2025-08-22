@@ -1,7 +1,7 @@
-import React from 'react';
-import usePageTracking from '../hooks/usePageTracking';
-import ReactGA from 'react-ga4';
-import { USE_GOOGLE_ANALYTICS } from './const';
+import React from "react";
+import usePageTracking from "../hooks/usePageTracking";
+import ReactGA from "react-ga4";
+import { USE_GOOGLE_ANALYTICS } from "./const";
 
 const TrackPageRoute: React.FC<{ children: React.ReactNode }> = ({
   children,

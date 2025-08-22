@@ -1,14 +1,14 @@
-import { useMemo } from 'react';
-import { locationForRun, titleForRun } from '@/utils/utils';
-import activities from '@/static/activities.json';
+import { useMemo } from "react";
+import { locationForRun, titleForRun } from "@/utils/utils";
+import activities from "@/static/activities.json";
 
 // standardize country names for consistency between mapbox and activities data
 const standardizeCountryName = (country: string): string => {
   switch (country) {
-    case '英国 / 英國':
-      return '英国';
-    case '美利坚合众国/美利堅合眾國':
-      return '美国';
+    case "英国 / 英國":
+      return "英国";
+    case "美利坚合众国/美利堅合眾國":
+      return "美国";
     default:
       return country;
   }
@@ -46,7 +46,7 @@ const useActivities = () => {
     });
 
     const yearsArray = [...years].sort().reverse();
-    const thisYear = yearsArray[0] || '';
+    const thisYear = yearsArray[0] || "";
 
     return {
       activities,

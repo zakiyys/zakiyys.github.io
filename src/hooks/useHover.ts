@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef } from "react";
 
 type HoverHook = [boolean, { onMouseOver: () => void; onMouseOut: () => void }];
 

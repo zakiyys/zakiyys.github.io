@@ -1,4 +1,4 @@
-import { Coordinate } from './utils';
+import { Coordinate } from "./utils";
 
 // Haversine distance calculation in meters
 export const haversine = (a: Coordinate, b: Coordinate): number => {
@@ -19,7 +19,7 @@ export const haversine = (a: Coordinate, b: Coordinate): number => {
 // Simplify route points to reduce computation for long routes
 export const simplifyRoute = (
   points: Coordinate[],
-  minDistance = 5
+  minDistance = 5,
 ): Coordinate[] => {
   if (points.length <= 100) {
     return points;
@@ -43,7 +43,7 @@ export const simplifyRoute = (
 
 // Calculate segment lengths and cumulative distances
 export const calculateSegmentLengths = (
-  points: Coordinate[]
+  points: Coordinate[],
 ): {
   segLens: number[];
   total: number;
@@ -90,7 +90,7 @@ export const calculateVisiblePoints = (
   points: Coordinate[],
   segLens: number[],
   cum: number[],
-  targetDist: number
+  targetDist: number,
 ): Coordinate[] => {
   const upTo = findSegmentIdx(cum, targetDist);
   const segStart = points[upTo];
@@ -144,7 +144,7 @@ export class RouteAnimator {
     points: Coordinate[],
     private onUpdate: (points: Coordinate[]) => void,
     private onComplete: () => void,
-    config: RouteAnimationConfig = {}
+    config: RouteAnimationConfig = {},
   ) {
     this.config = {
       speedMps: 4000,
@@ -168,7 +168,7 @@ export class RouteAnimator {
     let duration = (this.total / this.config.speedMps) * 1000;
     this.duration = Math.max(
       this.config.minDuration,
-      Math.min(this.config.maxDuration, duration)
+      Math.min(this.config.maxDuration, duration),
     );
 
     this.state = {
@@ -246,7 +246,7 @@ export class RouteAnimator {
       this.simplified,
       this.segLens,
       this.cum,
-      targetDist
+      targetDist,
     );
 
     this.onUpdate(visiblePoints);

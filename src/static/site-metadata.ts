@@ -15,9 +15,9 @@ const getBasePath = () => {
 };
 
 const data: ISiteMetadataResult = {
-  siteTitle: "Running Page",
-  siteUrl: "https://yihong.run",
-  logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTtc69JxHNcmN1ETpMUX4dozAgAN6iPjWalQ&usqp=CAU",
+  siteTitle: "Lari Lari Lari",
+  siteUrl: "https://instagram.com/zakiyys",
+  logo: "https://raw.githubusercontent.com/zakiyys/zakiyys.github.io/refs/heads/master/logo%20miaw.png",
   description: "Personal site and blog",
   navLinks: [
     {
